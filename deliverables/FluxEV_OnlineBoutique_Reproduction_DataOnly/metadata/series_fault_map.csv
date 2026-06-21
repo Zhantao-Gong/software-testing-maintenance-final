@@ -1,0 +1,8 @@
+fault_type,target_service,series_id,label_as_anomaly
+cpu_stress,recommendationservice,recommendationservice_cpu,1
+network_delay,frontend,frontend_p95_latency,1
+network_delay,frontend,frontend_avg_latency_ms,1
+network_delay,frontend,frontend_probe_latency_ms,1
+pod_kill,cartservice,cartservice_restarts,1
+pod_kill,cartservice,cartservice_pod_ready,1
+pod_kill,cartservice,cartservice_available_replicas,1

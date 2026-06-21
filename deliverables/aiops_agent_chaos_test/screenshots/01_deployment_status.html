@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#101418;color:#e6edf3;font-family:Consolas,'Cascadia Mono','Microsoft YaHei UI',monospace}.wrap{padding:20px 28px}pre{white-space:pre-wrap;word-break:break-word;background:#0b0f14;border:1px solid #2b3845;border-radius:8px;padding:18px;line-height:1.42;font-size:13px}</style></head><body><div class="wrap"><pre>$ kubectl get pods -n default -l app=aiops-agent -o wide
+NAME                           READY   STATUS    RESTARTS   AGE     IP             NODE       NOMINATED NODE   READINESS GATES
+aiops-agent-65fdd47645-frm85   1/1     Running   0          3m51s   10.244.3.144   minikube   &lt;none&gt;           &lt;none&gt;
+
+$ kubectl get deploy -n default aiops-agent recommendationservice cartservice frontend
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+aiops-agent             1/1     1            1           16m
+recommendationservice   1/1     1            1           4d7h
+cartservice             1/1     1            1           4d7h
+frontend                1/1     1            1           4d7h
+
+$ kubectl get deploy -n monitoring prometheus-deployment
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+prometheus-deployment   1/1     1            1           20d
+
+$ kubectl get podchaos,stresschaos,networkchaos -n chaos-testing
+
+STDERR:
+No resources found in chaos-testing namespace.
+</pre></div></body></html>

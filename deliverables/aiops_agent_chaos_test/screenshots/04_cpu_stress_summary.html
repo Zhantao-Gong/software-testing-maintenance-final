@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#101418;color:#e6edf3;font-family:Consolas,'Cascadia Mono','Microsoft YaHei UI',monospace}.wrap{padding:20px 28px}pre{white-space:pre-wrap;word-break:break-word;background:#0b0f14;border:1px solid #2b3845;border-radius:8px;padding:18px;line-height:1.48;font-size:16px}</style></head><body><div class="wrap"><pre>$ kubectl apply -f fluxev_data/chaos/cpu-stress-recommendationservice-001.yaml
+stresschaos.chaos-mesh.org/cpu-stress-recommendationservice-001 created
+
+$ kubectl logs -n default deploy/aiops-agent --tail=220
+[Agent] Signals: {"recommendation_cpu": 0.2000, "frontend_cpu": 0.0096, "cart_restarts_5m": 0.0, "unready_pods": 1.0}
+
+[Agent] Alert received: recommendationservice CPU is 0.2000; 1 pods are not ready
+[Agent] Reasoning step 1
+[Agent] Tool call: execute_promql(avg(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"recommendationservice.*"}[5m])))
+[Agent] Tool result: 0.1511
+[Agent] Tool call: get_service_logs({service_name: recommendationservice, tail_lines: 100})
+[Agent] Tool result: recommendationservice logs were INFO-level ListRecommendations traffic
+
+[Agent] Reasoning step 4
+[Agent] Tool call: execute_promql(rate(container_cpu_usage_seconds_total{namespace="default", pod=~"recommendationservice.*"}[1m]) * 100)
+[Agent] Tool result: 17.7619
+[Agent] Tool call: execute_promql(kube_pod_container_status_restarts_total{namespace="default", pod=~"recommendationservice.*"})
+[Agent] Tool result: 6 restarts
+
+[Agent] Final report after max tool steps:
+Alert: recommendationservice CPU is 0.2000; 1 pod is not ready
+Evidence: CPU threshold was crossed transiently; deployment is currently 1/1 available; pod is Running and Ready; logs show normal recommendation traffic; container has 6 historical restarts with last termination reason Error.
+Likely root cause: transient CPU stress / readiness flap during Chaos Mesh test, with historical application-level restart evidence.
+Action taken: no restart performed because the service is not stuck or unrecoverable.
+Recommendation: inspect older termination logs and keep monitoring restart recurrence.
+
+$ kubectl delete -f fluxev_data/chaos/cpu-stress-recommendationservice-001.yaml
+stresschaos.chaos-mesh.org "cpu-stress-recommendationservice-001" deleted
+</pre></div></body></html>

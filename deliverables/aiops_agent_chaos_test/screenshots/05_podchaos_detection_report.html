@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>body{margin:0;background:#101418;color:#e6edf3;font-family:Consolas,'Cascadia Mono','Microsoft YaHei UI',monospace}.wrap{padding:20px 28px}pre{white-space:pre-wrap;word-break:break-word;background:#0b0f14;border:1px solid #2b3845;border-radius:8px;padding:18px;line-height:1.48;font-size:16px}</style></head><body><div class="wrap"><pre>$ kubectl get pods -n default -l app=cartservice -o wide  # before
+cartservice-7956c8c845-945wl   1/1   Running   0   18m   10.244.3.141   minikube
+
+$ kubectl apply -f fluxev_data/chaos/pod-kill-cartservice-007.yaml
+podchaos.chaos-mesh.org/pod-kill-cartservice-007 created
+
+$ kubectl get pods -n default -l app=cartservice -o wide  # after PodChaos
+cartservice-7956c8c845-5fnth   1/1   Running   0   96s   10.244.3.145   minikube
+
+$ kubectl logs -n default deploy/aiops-agent --tail=220
+[Agent] Signals: {"recommendation_cpu": 0.0079, "frontend_cpu": 0.0085, "cart_restarts_5m": 0.0, "unready_pods": 1.0}
+
+[Agent] Alert received: 1 pods are not ready
+[Agent] Tool call: execute_promql(kube_deployment_status_replicas_unavailable{namespace="default"})
+[Agent] Tool result: cartservice = 1 unavailable, all others = 0
+[Agent] Tool call: get_service_logs({service_name: cartservice, tail_lines: 100})
+[Agent] Tool result: cartservice logs show normal startup, health checks, GetCartAsync/AddItemAsync traffic
+[Agent] Tool call: execute_promql(kube_pod_container_status_ready{namespace="default", pod=~"cartservice.*"})
+[Agent] Tool result: new cartservice container ready = 1
+[Agent] Tool call: execute_promql(time() - kube_pod_start_time{namespace="default", pod="cartservice-7956c8c845-5fnth"})
+[Agent] Tool result: new pod age ~59s
+
+[Agent] Final report after max tool steps:
+Evidence: cartservice had 1 unavailable replica during a short window; new pod is Running and Ready; restarts are 0; logs are normal.
+Root cause: transient readiness gap caused by PodChaos killing the only cartservice replica. Kubernetes recreated the pod automatically.
+Impact: about 30 seconds of cartservice unavailability risk.
+Action taken: no restart needed; service self-recovered.
+Recommendation: use &gt;=2 cartservice replicas or require sustained unavailability before alerting.
+
+$ kubectl delete -f fluxev_data/chaos/pod-kill-cartservice-007.yaml
+podchaos.chaos-mesh.org "pod-kill-cartservice-007" deleted</pre></div></body></html>

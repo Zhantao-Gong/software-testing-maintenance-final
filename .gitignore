@@ -19,3 +19,9 @@ black-box-testing/jmeter_test/Online-Boutique_report/
 # Temporary import folders
 _tmp_microservice_rca_experiment/
 _tmp_fluxev_lab/
+
+# Local script caches
+scripts/__pycache__/
+
+# Deliverable archives duplicated by extracted folders
+deliverables/*.zip
