@@ -1,0 +1,16 @@
+series_id,source,service,metric,unit,primary_eval,notes
+recommendationservice_cpu,prometheus,recommendationservice,cpu,cores,1,primary for CPU stress
+frontend_probe_latency_ms,probe,frontend,latency,ms,1,primary for network delay if no Prometheus latency
+frontend_probe_error_rate,probe,frontend,error_rate,ratio,0,probe errors
+frontend_p95_latency,prometheus,frontend,latency,ms,1,primary for network delay if available
+frontend_avg_latency_ms,prometheus,frontend,latency,ms,1,application average latency if available
+cartservice_restarts,prometheus,cartservice,restarts,count,1,primary for pod kill
+cartservice_pod_ready,prometheus,cartservice,pod_ready,count,1,primary for pod kill
+cartservice_available_replicas,prometheus,cartservice,available_replicas,count,1,primary for pod kill
+frontend_cpu,prometheus,frontend,cpu,cores,0,secondary
+cartservice_cpu,prometheus,cartservice,cpu,cores,0,secondary
+recommendationservice_memory,prometheus,recommendationservice,memory,bytes,0,secondary
+frontend_memory,prometheus,frontend,memory,bytes,0,secondary
+cartservice_memory,prometheus,cartservice,memory,bytes,0,secondary
+frontend_pod_ready,prometheus,frontend,pod_ready,count,0,secondary
+recommendationservice_pod_ready,prometheus,recommendationservice,pod_ready,count,0,secondary

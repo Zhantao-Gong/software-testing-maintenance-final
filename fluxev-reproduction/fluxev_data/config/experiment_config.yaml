@@ -1,0 +1,35 @@
+system: Online-Boutique
+namespace: default
+chaos_namespace: chaos-testing
+prometheus_url: http://localhost:9090
+frontend_url: http://localhost:8080/
+sampling:
+  scrape_interval_seconds: 5
+  query_range_step: 5s
+workload:
+  type: periodic_loadgenerator_replicas
+  period_seconds: 300
+  period_points_l: 60
+  pattern:
+    - {phase: low, replicas: 1, duration_seconds: 60}
+    - {phase: mid, replicas: 2, duration_seconds: 60}
+    - {phase: high, replicas: 4, duration_seconds: 60}
+    - {phase: mid, replicas: 2, duration_seconds: 60}
+    - {phase: low, replicas: 1, duration_seconds: 60}
+fluxev_parameters:
+  s: 10
+  p: 5
+  d: 2
+  q: 0.001
+  period_l: 60
+  init_points_target: 1440
+  estimated_a: 262
+  estimated_k: 1178
+timeline:
+  warmup_start_iso: 2026-06-13T17:07:03Z
+  t0_iso: 2026-06-13T17:17:03Z
+  test_start_iso: 2026-06-13T19:17:03Z
+  end_iso: 2026-06-13T21:17:03Z
+  warmup_minutes: 10
+  init_train_minutes: 120
+  test_minutes: 120

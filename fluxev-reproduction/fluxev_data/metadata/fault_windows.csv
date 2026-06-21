@@ -1,0 +1,10 @@
+fault_id,fault_type,chaos_kind,chaos_name,target_service,apply_time_iso,end_time_iso,label_start_iso,label_end_iso,duration_seconds,notes
+F001,cpu_stress,StressChaos,cpu-stress-recommendationservice-001,recommendationservice,2026-06-13T19:17:03Z,2026-06-13T19:20:03Z,2026-06-13T19:17:03Z,2026-06-13T19:21:03Z,180,workers=2 load=80
+F002,cpu_stress,StressChaos,cpu-stress-recommendationservice-002,recommendationservice,2026-06-13T19:27:03Z,2026-06-13T19:30:03Z,2026-06-13T19:27:03Z,2026-06-13T19:31:03Z,180,workers=2 load=80
+F003,cpu_stress,StressChaos,cpu-stress-recommendationservice-003,recommendationservice,2026-06-13T19:37:03Z,2026-06-13T19:40:03Z,2026-06-13T19:37:03Z,2026-06-13T19:41:03Z,180,workers=2 load=80
+F004,network_delay,NetworkChaos,network-delay-frontend-004,frontend,2026-06-13T19:47:03Z,2026-06-13T19:50:03Z,2026-06-13T19:47:03Z,2026-06-13T19:51:03Z,180,latency=300ms jitter=50ms
+F005,network_delay,NetworkChaos,network-delay-frontend-005,frontend,2026-06-13T19:57:03Z,2026-06-13T20:00:03Z,2026-06-13T19:57:03Z,2026-06-13T20:01:03Z,180,latency=300ms jitter=50ms
+F006,network_delay,NetworkChaos,network-delay-frontend-006,frontend,2026-06-13T20:07:03Z,2026-06-13T20:10:03Z,2026-06-13T20:07:03Z,2026-06-13T20:11:03Z,180,latency=300ms jitter=50ms
+F007,pod_kill,PodChaos,pod-kill-cartservice-007,cartservice,2026-06-13T20:17:03Z,2026-06-13T20:17:08Z,2026-06-13T20:17:03Z,2026-06-13T20:19:03Z,0,mode=one
+F008,pod_kill,PodChaos,pod-kill-cartservice-008,cartservice,2026-06-13T20:27:03Z,2026-06-13T20:27:08Z,2026-06-13T20:27:03Z,2026-06-13T20:29:03Z,0,mode=one
+F009,pod_kill,PodChaos,pod-kill-cartservice-009,cartservice,2026-06-13T20:37:03Z,2026-06-13T20:37:08Z,2026-06-13T20:37:03Z,2026-06-13T20:39:03Z,0,mode=one

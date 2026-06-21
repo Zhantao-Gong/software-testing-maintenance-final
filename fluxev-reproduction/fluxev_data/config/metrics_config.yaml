@@ -1,0 +1,20 @@
+required_series:
+  - recommendationservice_cpu
+  - frontend_cpu
+  - cartservice_cpu
+  - recommendationservice_memory
+  - frontend_memory
+  - cartservice_memory
+  - cartservice_pod_ready
+  - frontend_pod_ready
+  - recommendationservice_pod_ready
+  - cartservice_restarts
+  - cartservice_available_replicas
+optional_series:
+  - frontend_qps
+  - frontend_5xx_rate
+  - frontend_p95_latency
+  - frontend_avg_latency_ms
+probe_series:
+  - frontend_probe_latency_ms
+  - frontend_probe_error_rate
