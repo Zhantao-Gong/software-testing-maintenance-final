@@ -1,0 +1,9 @@
+name: online-boutique-aiops
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - openai==1.88.0
+      - requests==2.32.4
