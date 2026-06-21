@@ -10,3 +10,8 @@
 
 # Ignore nested git metadata from vendored repos
 Online-Boutique/.git-backup/
+
+# Black-box testing generated artifacts
+black-box-testing/Online-Boutique 微服务电商系统黑盒测试.docx
+black-box-testing/jmeter_test/OnlineBoutique_report.jtl
+black-box-testing/jmeter_test/Online-Boutique_report/
