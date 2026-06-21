@@ -15,3 +15,6 @@ Online-Boutique/.git-backup/
 black-box-testing/Online-Boutique 微服务电商系统黑盒测试.docx
 black-box-testing/jmeter_test/OnlineBoutique_report.jtl
 black-box-testing/jmeter_test/Online-Boutique_report/
+
+# Temporary import folders
+_tmp_microservice_rca_experiment/

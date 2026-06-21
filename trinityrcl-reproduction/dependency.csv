@@ -1,0 +1,16 @@
+source,target
+frontend,checkoutservice
+frontend,adservice
+frontend,cartservice
+frontend,productcatalogservice
+
+checkoutservice,paymentservice
+checkoutservice,shippingservice
+checkoutservice,emailservice
+checkoutservice,currencyservice
+
+cartservice,redis
+
+productcatalogservice,recommendationservice
+
+loadgenerator,cartservice
